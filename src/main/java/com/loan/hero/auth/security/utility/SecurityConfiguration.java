@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -57,15 +58,17 @@ public class SecurityConfiguration {
                                 SessionCreationPolicy.STATELESS
                         )
                 )
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                WhiteList.freeAccess())
-                        .permitAll()
-                        .requestMatchers(
-                                WhiteList.swagger()
-                        ).permitAll()
-                        .anyRequest().authenticated())
+//                .authorizeHttpRequests(authorize -> authorize.requestMatchers(
+//                                HttpMethod.POST,
+//                                WhiteList.freeAccess())
+//                        .permitAll()
+//                        .requestMatchers(
+//                                WhiteList.swagger()
+//                        ).permitAll()
+//                        .anyRequest().authenticated())
+
+
+
                 .addFilterAt(
                         login(),
                         UsernamePasswordAuthenticationFilter.class
@@ -79,7 +82,12 @@ public class SecurityConfiguration {
                         HeroAuthenticateFilter.class
                 )
                 .build();
-    }
+
+
+
+        }
+
+
 
     private UsernamePasswordAuthenticationFilter login() {
         final UsernamePasswordAuthenticationFilter authenticationFilter =
@@ -105,4 +113,12 @@ public class SecurityConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
+
+
+
+
+
+
 }

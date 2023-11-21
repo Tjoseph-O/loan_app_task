@@ -48,15 +48,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Slf4j
 @EnableScheduling
 @SpringBootApplication
-public class Application {
+public class HeroloanApplication {
 
     public static void main(String[] args) {
         final SpringApplication application =
-                new SpringApplication(Application.class);
+                new SpringApplication(HeroloanApplication.class);
 
         application.setBannerMode(Banner.Mode.LOG);
         application.run(args);
-        log.info("::: Hero Server Running :::");
+        log.info("::: Hero Server is up and Running :::");
     }
 }
 
